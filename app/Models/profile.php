@@ -8,8 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class profile extends Model
 {
     use HasFactory;
+    
 
+    protected $fillable = [
+        'title',
+        'description',
+        'url',
+        'image'
+    ];
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function follwers(){
+        return $this->belongsToMany(User::class);
+        }  
 }

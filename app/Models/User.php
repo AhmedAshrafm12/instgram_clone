@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -43,6 +45,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+  
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title'=>$user->username,
+                'url'=>$user->username.'@insta.com',
+            ]);
+        });
+    }
+
 
     public function profile(){
         return $this->hasOne(profile::class);
@@ -50,4 +63,9 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(post::class)->OrderBy('created_at','DESC');
     }
+  
+    public function follwing(){
+  return  $this->belongsToMany(profile::class);
+    }  
+
 }

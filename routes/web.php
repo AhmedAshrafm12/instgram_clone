@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\follwingController;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\profileController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [postController::class,'index']);
 
 Auth::routes();
 
@@ -25,3 +24,8 @@ Route::get('/profile/{user}', [profileController::class, 'index'])->name('profil
 Route::get('/p/create', [postController::class, 'create'])->name('post.create');
 Route::get('/p/{post}', [postController::class, 'show']);
 Route::post('/p', [postController::class, 'store'])->name('post.store');
+Route::get('/profile/{user}/edit', [profileController::class, 'edit']);
+Route::post('/profile/{profile}', [profileController::class, 'update']);
+// Route::post('/profile/{profile}', [profileController::class, 'update']);
+// Route::patch()
+Route::get('/follow/{user}', [follwingController::class, 'store']);
