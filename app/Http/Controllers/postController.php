@@ -19,6 +19,7 @@ class postController extends Controller
     //
    public function index(){
     $users =  auth()->user()->follwing->pluck('user_id');
+    $users->push(auth()->user()->id);
     $posts = post::whereIn('user_id',$users)->with('user')->latest()->paginate(5);
     return view('posts.index',compact('posts'));
    

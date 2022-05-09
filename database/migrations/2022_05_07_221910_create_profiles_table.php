@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->string('url');
-            $table->string('image')->default('defaultImage.jpg');
+            $table->string('image')->default('uploads/s7S05EDKMsjYOXdLdhGdcpYtpiWY8vFdp8qlnFz6.png');
             $table->integer('user_id');
             $table->index('user_id');
             $table->timestamps();
